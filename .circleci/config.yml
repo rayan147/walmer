@@ -13,6 +13,9 @@ jobs:
       - run:
           name: "install dependencies"
           command: "npm install"
+      - run:
+          name: "docker build"
+          command: "docker build -t node-app-circleci:v1.0.2 ."
       
 
 workflows:
