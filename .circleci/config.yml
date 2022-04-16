@@ -7,7 +7,7 @@ jobs:
      machine:
        image: ubuntu-2004:202201-02
        docker_layer_caching: true
-       
+
      steps:
     # checkout pull the code from github
       - checkout
@@ -15,10 +15,23 @@ jobs:
           name: "install dependencies"
           command: "npm install"
       - run:
-          name: "docker build"
+          name: "Docker build"
           command: |
                docker build -t node-app-circleci:v1.0.2 .
-      
+      - run:
+          name: "Docker tag"
+          command: |
+               docker tag node-app-circleci:v1.0.2 rayan147/node-app-circleci:v1.0.3
+      - run:
+          name: "Docker run and grab the container id"
+          command: |
+               docker run  node-app-circleci:v1.0.3
+               
+      - run:
+          name: "Docker commit"
+          command: |
+               docker commit node-app-circleci:v1.0.2 rayan147/node-app-circleci:v1.0.3
+
 
 workflows:
   putting_together_the_project:
