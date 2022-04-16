@@ -4,10 +4,11 @@ jobs:
 # name of the job
   build:
   # enviroment host for docker, this where the code will be built
-    docker:
-      - image: cimg/node:17.9.0
-
-    steps:
+     machine:
+       image: ubuntu-2004:202201-02
+       docker_layer_caching: true
+       
+     steps:
     # checkout pull the code from github
       - checkout
       - run:
@@ -16,8 +17,7 @@ jobs:
       - run:
           name: "docker build"
           command: |
-           docker info
-           sudo docker build -t node-app-circleci:v1.0.2 .
+               docker build -t node-app-circleci:v1.0.2 .
       
 
 workflows:
