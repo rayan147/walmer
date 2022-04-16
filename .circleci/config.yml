@@ -17,7 +17,7 @@ jobs:
           name: "docker build"
           command: |
            docker info
-           docker build -t node-app-circleci:v1.0.2 .
+           sudo docker build -t node-app-circleci:v1.0.2 .
       
 
 workflows:
