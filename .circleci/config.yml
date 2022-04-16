@@ -25,12 +25,19 @@ jobs:
       - run:
           name: "Docker run and grab the container id"
           command: |
-               docker run  node-app-circleci:v1.0.3
-               
+               docker run --name node-app-container node-app-circleci:v1.0.2
+      - run:
+          name: "Container id variable"
+          command: |
+               export CONTAINER_ID=$(docker ps -aqf "name=node-app-container")
       - run:
           name: "Docker commit"
           command: |
-               docker commit node-app-circleci:v1.0.2 rayan147/node-app-circleci:v1.0.3
+               docker commit $CONTAINER_ID rayan147/node-app-circleci:v1.0.3
+      - run:
+          name: "Docker push"
+          command: |
+               docker push rayan147/node-app-circleci:v1.0.3
 
 
 workflows:
