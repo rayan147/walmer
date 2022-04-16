@@ -16,7 +16,7 @@ jobs:
       - run:
           name: "docker build"
           command: |
-           systemctl start docker
+           docker info
            docker build -t node-app-circleci:v1.0.2 .
       
 
