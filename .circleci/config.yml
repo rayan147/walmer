@@ -43,4 +43,8 @@ jobs:
 workflows:
   putting_together_the_project:
     jobs:
-      - build
+      - approve_and_deploy_to_github:
+          type: approval
+      - build:
+          requires:
+            - approve_and_deploy_to_github
